@@ -8,8 +8,7 @@ export default {
   <div class="full">
     <div class="comentarios">
       <RouterLink to="/singout"
-        ><h1>{{ comentarios.autor.username }}</h1></RouterLink
-      >
+        ><h1>{{ comentarios.autor.username }}</h1></RouterLink>
       <h2>{{ comentarios.texto }}</h2>
     </div>
   </div>
@@ -17,6 +16,8 @@ export default {
 
 <style scoped>
 .comentarios {
+  max-height: 500px;
+  max-width: 750px;
   border-radius: 0px 10px 10px 10px;
   border: 1px solid #eef;
   background-color: #161e35;
@@ -33,11 +34,12 @@ h1 {
 }
 
 h2 {
-  width: 200px;
+  word-break: break-all;
   margin-top: 7px;
   margin-left: 10px;
   font-size: 10pt;
 }
+
 
 .full {
   max-width: 500px;

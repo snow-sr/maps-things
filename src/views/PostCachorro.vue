@@ -19,9 +19,9 @@ export default {
         try {
           const addCachorro = await axios.post(
             "http://localhost:8000/cachorros/",
-            this.cachorro,
-            //alert("")
-          );
+            this.cachorro,);
+            alert("Cachorro registrado com sucesso!"),
+            this.$router.push("/cachorrada");
         } catch {
           alert("Erro 2222");
         }
@@ -39,6 +39,8 @@ export default {
             "http://localhost:8000/cachorros/",
             this.cachorro
           )
+          alert("Cachorro registrado com sucesso!"),
+            this.$router.push("/cachorrada");
       },
     },
     computed: {
@@ -159,14 +161,11 @@ export default {
 
             <div class="continue-button">
               <button @click.prevent="submitFile" >Adicione</button>
+              
             </div>
           </div>
         </form>
       </main>
-      <section class="images">
-        <img src="@/assets/img/image-3.svg" alt="image" />
-        <div class="circle"></div>
-      </section>
     </div>
   </div>
 </template>
@@ -183,7 +182,9 @@ export default {
     padding: 3% 5%;
   }
 
-  .user-name {
+  h1 {
+    
+    text-transform: uppercase;
     background: -webkit-linear-gradient(45deg, #8a93e4, #00b7ff, #3071e7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -196,7 +197,7 @@ export default {
   button {
     background: linear-gradient(to right, #0419d6, #00b7ff);
     color: #fff;
-    width: 150px;
+    width: 450px;
     height: 40px;
     border-radius: 40px;
     margin-top: 20px;
@@ -214,6 +215,13 @@ export default {
     color: #eef;
   }
 
+
+
+  label{
+    margin-top: 10px;
+    color: #eef;
+  }
+  
   .logout button {
     margin-top: 60px;
     width: 400px;
@@ -253,11 +261,9 @@ export default {
   }
 
   .container {
-    background: rgba(22, 30, 53, 0.65);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(12.5px);
-    -webkit-backdrop-filter: blur(12.5px);
-    width: 80%;
+    
+    width: 20rem;
+    border-radius: 20px;
     height: 100vh;
     display: flex;
     justify-content: center;

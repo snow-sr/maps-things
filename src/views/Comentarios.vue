@@ -41,61 +41,66 @@ export default {
 };
 </script>
 <template>
-  <div class="outer">
-    <div class="map">
-      <img src="@/assets/img/ifcmapatt.png" alt="" />
+  <div class="all">
+
+    <div class="outer">
+      <div class="map">
+        <img src="@/assets/img/ifcmapatt.png" alt="" />
     </div>
     <div class="container">
       <div class="comentarios">
         <Comentarios
-          
-          v-for="comentario in comentarios"
+         
+        v-for="comentario in comentarios"
           :key="comentario.id"
           :comentarios="comentario"
-        />
+          />
       </div>
     </div>
   </div>
   <div class="texts">
     <div class="enviar">
       <input
-        @keydown.enter="addComment()"
-        type="text"
+      @keydown.enter="addComment()"
+      type="text"
         style="padding: 4px"
         placeholder="escreva seu comentario
-      "
+        "
         v-model="comentario.texto"
-      />
-      <div class="submit">
-        <button
+        />
+        <div class="submit">
+          <button
           v-on:click.prevent="addComment"
           type="submit"
           class="btn btn-primary"
-        >
+          >
           Enviar
         </button>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped>
+
+.all{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .outer {
   margin-top: 3rem;
 }
 .texts {
-  margin-left: 57%;
+  margin-top: 10px;
 }
 .comentarios {
-  width: 0px;
   height: 90px;
 }
 
-.outer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 h1 {
   background: -webkit-linear-gradient(45deg, #8a93e4, #00b7ff, #3071e7);
@@ -114,7 +119,7 @@ input {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(12.5px);
   -webkit-backdrop-filter: blur(12.5px);
-  width: 555px;
+  width: 840px;
   border-radius: 15px;
   outline: 0;
 }
@@ -139,21 +144,21 @@ button:hover {
 }
 
 .map img {
+  border-radius: 20px 20px 0 0;
   height: 840px;
-  border-radius: 16px 0px 0px 16px;
+
 }
 
 .container {
   overflow: auto;
   display: flex;
-  border-radius: 0px 16px 16px 0px;
   background: #161e35a6;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(12.5px);
   -webkit-backdrop-filter: blur(12.5px);
   border: 0px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0px 5px 30px #232733;
-  width: 31%;
+  width: 900px;
   height: 833px;
 }
 </style>
