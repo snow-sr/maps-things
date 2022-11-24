@@ -55,9 +55,10 @@ const router = createRouter({
       children: [
 
         {
-          path: "/alterar",
-          name: "alterar",
+          path: "/alterarCachorro/:id",
+          name: "alterarCachorro",
           component: AlterarCachorro,
+          props: true,
         },
 
 

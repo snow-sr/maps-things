@@ -89,8 +89,8 @@ export default {
           <div class="remove" v-bind="superuser">
             <button v-if="is_superuser == true" @click="removerCao"><i class="fa-solid fa-trash"></i>Remover Cão</button>
           </div>
-          <div class="alterar" v-bind="superuser">
-            <RouterLink to="/alterar"><button v-if="is_superuser == true" @click="alterarCao"> Alterar cão</button></RouterLink>
+          <div class="alterarCachorro" v-bind="superuser">
+            <RouterLink :to="`/alterarCachorro/${cachorro.id}`"><button v-if="is_superuser == true" @click="alterarCao"> Alterar cão</button></RouterLink>
           </div>
         </div>
       </div>

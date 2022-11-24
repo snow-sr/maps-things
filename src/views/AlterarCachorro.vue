@@ -5,25 +5,43 @@ import { mapStores, mapState } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 export default {
   components: { CachorroCard },
+  name: "cachorros",
+  props: ["id"],
   data() {
     return {
-      cachorro:{},
-    };
+      cachorro:{
+        cachorro: 0,
+        peso: "",
+        altura: "",
+        descricao: "",
+        nome: "",
+        nome_responsavel: "",
+        tel_responsavel: "",
+        foto: {
+          url: null,
+      },
+    },
+  };
   },
+
   async created() {
+    const res = await axios.get(`http://localhost:8000/cachorros/${this.id}/`);
+    this.cachorro = res.data;
       // const user = await axios.get("http://localhost:8000/token/");
       // this.user = cachorros.data;
     },
     methods: {
       async alterarDog() {
+        const info = {
+          foto_attachment_key: this.cachorro.foto_attachment_key
+        }
         try {
           await axios.patch(
-            "(`http://localhost:8000/cachorros/${this.id}/`);",
-            this.cachorro,);
-            alert("Cachorro registrado com sucesso!"),
-            this.$router.push("/cachorrada");
-        } catch {
-          alert("Erro 2222");
+            `http://localhost:8000/cachorros/${this.id}/`,
+            info)
+          alert("Alterado com sucesso!")
+         } catch {
+          alert("Algo deu errado, tente novamente ");
         }
       },
       uploadFile() {
@@ -33,32 +51,17 @@ export default {
         const formData = new FormData();
         formData.append('file', this.Images);
         const headers = { 'Content-Type': 'multipart/form-data' };
-        const { data } = await  axios.patch('http://localhost:8000/api/media/images/', formData, { headers })
+        const { data } = await  axios.post('http://localhost:8000/api/media/images/', formData, { headers })
         this.cachorro.foto_attachment_key = data.attachment_key
-        await axios.patch(
-            "(`http://localhost:8000/cachorros/${this.id}/`);",
-            this.cachorro
-          )
-          alert("Cachorro alterado com sucesso!"),
-            this.$router.push("/cachorrada");
-      },
+      }
     },
     computed: {
       ...mapStores(useAuthStore),
-      ...mapState(useAuthStore, ["id"]),
+      ...mapState(useAuthStore, ["cachorros","username", "email", "id", "first_name"]),
     },
-  //   async sendFile() {
-  //     let dataForm = new FormData();
-  //     for (let file of this.$refs.files.files) {
-  //       dataForm.append(`file`, file);
-  //     }
-  //     let res = await fetch(`http://localhost:8000/media/images`, {
-  //       method: 'POST',
-  //       body: dataForm,
-  //     });
-  //     let data = await res.json();
-  //     console.log(data);
-  //   },
+    mounted() {
+      
+    },
   };
 </script>
 
@@ -79,26 +82,24 @@ export default {
               <div class="input-box">
                 <label for="firstname">Nome do cão</label>
                 <input
-                @keydown.enter="submitFile()"
+                @keydown.enter="alterarDog()"
                   id="nome"
                   type="text"
                   name="nome"
                   placeholder="nome"
                   v-model="cachorro.nome"
-                  required
                 />
               </div>
 
               <div class="input-box">
                 <label for="lastname">desc</label>
                 <input
-                @keydown.enter="submitFile()"
+                @keydown.enter="alterarDog()"
                   id="descricao"
                   type="text"
                   name="descricao"
                   placeholder="desc"
                   v-model="cachorro.descricao"
-                  required
                 />
               </div>
 
@@ -106,25 +107,23 @@ export default {
               <div class="input-box">
                 <label for="email">Peso</label>
                 <input
-                @keydown.enter="submitFile()"
+                @keydown.enter="alterarDog()"
                   id="peso "
                   type="text"
                   name="peso"
                   placeholder="peso"
                   v-model="cachorro.peso"
-                  required
                 />
               </div>
 
               <div class="input-box">
                 <label for="number">altura</label>
                 <input
-                @keydown.enter="submitFile()"
+                @keydown.enter="alterarDog()"
                   id="altura"
                   type="text"
                   name="altura"
                   v-model="cachorro.altura"
-                  required
                   placeholder="altura"
                 />
               </div>
@@ -132,36 +131,34 @@ export default {
               <div class="input-box">
                 <label for="password">responsavel</label>
                 <input
-                @keydown.enter="submitFile()"
+                @keydown.enter="alterarDog()"
                   id="nome_responsavel"
                   type="text"
                   name="nome_responsavel"
                   placeholder="responsavel"
                   v-model="cachorro.nome_responsavel"
-                  required
                 />
               </div>
 
               <div class="input-box">
                 <label for="confirmPassword">tel_responsavel</label>
                 <input
-                  @keydown.enter="submitFile()"
+                  @keydown.enter="alterarDog()"
                   id="tel_responsavel"
                   type="text"
                   name="tel_responsavel"
                   placeholder="tel_responsavel"
                   v-model="cachorro.tel_responsavel"
-                  required
                 />
               </div>
             </div>
             <div class="alterar-foto">
               <input type="file" @change="uploadFile" ref="file" >
-           </div>
+              <button @click.prevent="submitFile">Upload!</button>
+            </div>
 
             <div class="continue-button">
               <button @click.prevent="alterarDog" >Altere</button>
-              
             </div>
           </div>
         </form>
