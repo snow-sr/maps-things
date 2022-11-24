@@ -24,7 +24,10 @@
     methods: {
       async editarPerfil() {
         const info = {
-          foto_attachment_key: this.user.foto_attachment_key
+          foto_attachment_key: this.user.foto_attachment_key,
+          username: this.user.username,
+          email: this.user.email,
+          first_name: this.user.first_name,
         }
         try {
           await axios.patch(
@@ -44,6 +47,7 @@
         const headers = { 'Content-Type': 'multipart/form-data' };
         const { data } = await  axios.post('http://localhost:8000/api/media/images/', formData, { headers })
         this.user.foto_attachment_key = data.attachment_key
+        alert("Foto adicionada!")
       }
     },
     computed: {

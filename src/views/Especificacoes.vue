@@ -34,7 +34,7 @@ export default {
     async removerCao() {
       await axios.delete(`http://localhost:8000/cachorros/${this.id}/`);
       alert("Cachorro deletado com sucesso!"),
-            this.$router.push("/cachorrada");
+      this.$router.push("/cachorrada");
       },
     async postEspecificacoes() {
       this.especificacoes.cachorros = this.$route.params.id;
@@ -90,7 +90,8 @@ export default {
             <button v-if="is_superuser == true" @click="removerCao"><i class="fa-solid fa-trash"></i>Remover Cão</button>
           </div>
           <div class="alterarCachorro" v-bind="superuser">
-            <RouterLink :to="`/alterarCachorro/${cachorro.id}`"><button v-if="is_superuser == true" @click="alterarCao"> Alterar cão</button></RouterLink>
+            <RouterLink :to="`/alterarCachorro/${cachorro.id}`">
+              <button v-if="is_superuser == true" @click="alterarCao"> Alterar cão</button></RouterLink>
           </div>
         </div>
       </div>

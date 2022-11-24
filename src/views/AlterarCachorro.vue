@@ -33,13 +33,21 @@ export default {
     methods: {
       async alterarDog() {
         const info = {
-          foto_attachment_key: this.cachorro.foto_attachment_key
+          foto_attachment_key: this.cachorro.foto_attachment_key,
+          nome: this.cachorro.nome,
+          peso: this.cachorro.peso,
+          altura: this.cachorro.altura,
+          descricao: this.cachorro.descricao,
+          nome_responsavel: this.cachorro.nome_responsavel, 
+          tel_responsavel: this.cachorro.tel_responsavel,
+
         }
         try {
           await axios.patch(
             `http://localhost:8000/cachorros/${this.id}/`,
             info)
           alert("Alterado com sucesso!")
+          this.$router.push("/cachorrada");
          } catch {
           alert("Algo deu errado, tente novamente ");
         }
@@ -53,6 +61,7 @@ export default {
         const headers = { 'Content-Type': 'multipart/form-data' };
         const { data } = await  axios.post('http://localhost:8000/api/media/images/', formData, { headers })
         this.cachorro.foto_attachment_key = data.attachment_key
+        alert("Foto adicionada!")
       }
     },
     computed: {
