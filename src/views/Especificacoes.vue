@@ -33,7 +33,9 @@ export default {
     },
     async removerCao() {
       await axios.delete(`http://localhost:8000/cachorros/${this.id}/`);
-    },
+      alert("Cachorro deletado com sucesso!"),
+            this.$router.push("/cachorrada");
+      },
     async postEspecificacoes() {
       this.especificacoes.cachorros = this.$route.params.id;
       await this.$post("cachorros/", this.especificacoes);
@@ -45,7 +47,7 @@ export default {
     this.cachorro = res.data;
   },
   computed: {
-    ...mapState("auth", ["cachorros", "username", "is_superuser"]),
+    ...mapState(useAuthStore, ["cachorros", "username", "is_superuser"]),
   },
 };
 </script>
@@ -84,7 +86,12 @@ export default {
             <i class="fa-brands fa-whatsapp"></i>
             <a target="_blank" :href="cachorro.tel_responsavel">Contato</a>
           </div>
-          <button @click="removerCao">Remover Cão</button>
+          <div class="remove" v-bind="superuser">
+            <button v-if="is_superuser == true" @click="removerCao"><i class="fa-solid fa-trash"></i>Remover Cão</button>
+          </div>
+          <div class="alterar" v-bind="superuser">
+            <RouterLink to="/alterar"><button v-if="is_superuser == true" @click="alterarCao"> Alterar cão</button></RouterLink>
+          </div>
         </div>
       </div>
     </div>
@@ -92,6 +99,30 @@ export default {
 </template>
 
 <style scoped>
+
+.remove button{
+  margin-bottom: 10px;
+  border-radius: 8px;
+  height: 50px;
+  width: 200px;
+  cursor: pointer;
+  color: #fff;
+  background-color: red;
+
+}
+
+.alterar button{
+  margin-bottom: 10px;
+  border-radius: 8px;
+  height: 50px;
+  width: 200px;
+  cursor: pointer;
+  color: #fff;
+  background-color: rgb(78, 92, 0);
+
+}
+
+
 a {
   color: #ffffff !important;
   font-size: 18pt;

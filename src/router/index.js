@@ -10,7 +10,7 @@ import Carrosel from "@/components/Carrosel.vue";
 import Singout from "@/views/SingoutView.vue";
 import Emergencia from "@/views/EmergenciaView.vue";
 import PostCachorro from "@/views/PostCachorro.vue";
-import Loginadm from "@/views/Loginadm.vue";
+import AlterarCachorro from "@/views/AlterarCachorro.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,12 +46,21 @@ const router = createRouter({
           name: "signin",
           component: SignInView,
         },
+        
       ],
     },
     {
       path: "",
       component: () => import("@/layouts/FullLayout.vue"),
       children: [
+
+        {
+          path: "/alterar",
+          name: "alterar",
+          component: AlterarCachorro,
+        },
+
+
         {
           path: "/cachorrada",
           name: "home",
