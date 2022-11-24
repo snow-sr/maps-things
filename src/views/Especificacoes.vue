@@ -1,13 +1,14 @@
 <script>
 import { mapState } from "pinia";
+import { useAuthStore } from "@/stores/auth";
 import axios from "axios";
 export default {
   name: "cachorros",
   props: ["id"],
   data() {
     return {
+      superuser: "",
       value: 1,
-      cachorros: [],
       cachorro: {
         cachorro: 0,
         peso: "",
@@ -16,15 +17,22 @@ export default {
         nome: "",
         nome_responsavel: "",
         tel_responsavel: "",
+        foto: {
+          url: null,
+        },
       },
     };
   },
+
   methods: {
     async getAllCachorros(id) {
       await this.$get(
         `especificacoes/cachorros/${id}/`,
         this.especificacoes.cachorros
       );
+    },
+    async removerCao() {
+      await axios.delete(`http://localhost:8000/cachorros/${this.id}/`);
     },
     async postEspecificacoes() {
       this.especificacoes.cachorros = this.$route.params.id;
@@ -37,7 +45,7 @@ export default {
     this.cachorro = res.data;
   },
   computed: {
-    ...mapState("auth", ["cachorros"]),
+    ...mapState("auth", ["cachorros", "username", "is_superuser"]),
   },
 };
 </script>
@@ -47,7 +55,6 @@ export default {
     <div class="menu1">
       <div id="main-banner">
         <img :src="cachorro.foto.url" />
-
         <div id="main-banner-content"></div>
       </div>
 
@@ -77,6 +84,7 @@ export default {
             <i class="fa-brands fa-whatsapp"></i>
             <a target="_blank" :href="cachorro.tel_responsavel">Contato</a>
           </div>
+          <button @click="removerCao">Remover Cão</button>
         </div>
       </div>
     </div>
