@@ -10,6 +10,7 @@ export default {
       comentarios: [],
       comentario: {
         texto: "",
+        publicado:"",
         autor: 0,
       },
     };

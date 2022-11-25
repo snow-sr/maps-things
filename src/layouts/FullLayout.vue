@@ -1,19 +1,22 @@
 <script>
+import axios from "axios";
 import { mapState, mapStores } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 // import axios from "axios";
 export default {
   data() {
     return {
+      user: "",
       superuser: "",
     };
   },
   async created() {
-    // const user = await axios.get("http://localhost:8000/token/", user);
-    // this.user = cachorros.data;
+    const res = await axios.get(`http://localhost:8000/usuarios/${this.id}/`);
+    this.user = res.data;
+    console.log(this.user)
   },
   computed: {
-    ...mapState(useAuthStore, ["username", "is_superuser"]),
+    ...mapState(useAuthStore, ["id","username", "is_superuser"]),
   },
 };
 </script>
@@ -32,10 +35,13 @@ export default {
           <li>
             <RouterLink to="/postcachorro" v-if="0 === '2'"
               >Novo cão</RouterLink
-            >
-          </li>
-          <li v-if="username">
-            <RouterLink to="/singout">{{ username }}</RouterLink>
+              >
+            </li>
+            <li v-if="username">
+              <div class="user-foto">
+                <img :src= " user.foto.url "/> 
+              </div>
+            <RouterLink to="/singout"></RouterLink>
           </li>
           <li v-else>
             <RouterLink to="/signin">Login/Registro</RouterLink>
@@ -62,6 +68,7 @@ export default {
         ></RouterLink>
 
         <div class="menu" v-bind="superuser">
+
           <ul>
             <li>
               <RouterLink to="/cachorrada">Home</RouterLink>
@@ -76,12 +83,13 @@ export default {
               <RouterLink to="/contate">Sobre Nos</RouterLink>
             </li>
             <li v-if="username">
-              <RouterLink to="/singout">{{ username }}</RouterLink>
+              <RouterLink to="/singout"> <img :src= " user.foto.url "/> </RouterLink>
             </li>
             <li v-else>
               <RouterLink to="/signin">Login/Registro</RouterLink>
             </li>
           </ul>
+
         </div>
       </div>
     </div>
@@ -90,6 +98,17 @@ export default {
 </template>
 
 <style scoped>
+
+ul img{
+  width:2rem;
+  height: 2rem;
+}
+
+
+.username img{
+  border-radius: 50%;
+}
+
 .hamburger-menu {
   z-index: 10;
   display: none;
@@ -123,12 +142,12 @@ export default {
   z-index: 1;
 }
 
-li {
+/* li {
   margin-left: 10px;
   color: #eef;
   margin-bottom: 15px;
   text-transform: uppercase;
-}
+} */
 .menu__btn > span,
 .menu__btn > span::before,
 .menu__btn > span::after {
@@ -192,7 +211,9 @@ a:-webkit-any-link {
     display: flex;
     align-items: center;
     justify-content: center;
+    
   }
+
 
   .menu {
     display: none;

@@ -17,10 +17,10 @@
     //   // const user = await axios.get("http://localhost:8000/token/");
     //   // this.user = cachorros.data;
     // },
-    async created() {
-    const res = await axios.get(`http://localhost:8000/usuarios/${this.id}/`);
-    this.user = res.data;
-    console.log(this.user)
+      async created() {
+      const res = await axios.get(`http://localhost:8000/usuarios/${this.id}/`);
+      this.user = res.data;
+      console.log(this.user)
   },
     methods: {
       async editarPerfil() {

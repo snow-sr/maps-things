@@ -32,7 +32,7 @@
           <li><RouterLink to="/comentarios">Aba de Comentarios</RouterLink></li>
           <li><RouterLink to="/contate">Sobre nós</RouterLink></li>
           <li v-if="username">
-            <RouterLink to="/singout">{{ username }}</RouterLink>
+            <RouterLink to="/singout"><img :src= " user.foto.url "/> </RouterLink>
           </li>
           <li v-else>
             <RouterLink to="/signin">Login/Registro</RouterLink>
@@ -71,7 +71,7 @@
               <RouterLink to="/contate">Sobre nós</RouterLink>
             </li>
             <li v-if="username">
-              <RouterLink to="/singout">{{ username }}</RouterLink>
+              <RouterLink to="/singout"> <img :src= " user.foto.url "/> </RouterLink>
             </li>
             <li v-else>
               <RouterLink to="/signin">Login/Registro</RouterLink>
