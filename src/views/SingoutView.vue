@@ -9,6 +9,7 @@
           username: "",
           email: "",
           first_name: "",
+          // password: "",
         },
       };
     },
@@ -28,6 +29,7 @@
           username: this.user.username,
           email: this.user.email,
           first_name: this.user.first_name,
+          // password: this.user.password,
         }
         try {
           await axios.patch(
@@ -53,11 +55,6 @@
     computed: {
       ...mapStores(useAuthStore),
       ...mapState(useAuthStore, ["username", "email", "id", "first_name"]),
-    },
-    mounted() {
-      this.user.email = this.email;
-      this.user.username = this.username;
-      this.user.first_name = this.first_name;
     },
   };
   // app.$mount("#content");
@@ -92,16 +89,15 @@
         </div>
         <div class="user-email">
           <div>
-            <span>{{ first_name }}</span>
+            <i><h3>{{ email }}</h3></i>
           </div>
         </div>
-
         <span>Nova nome:</span>
         <div class="new">
           <input
             type="text"
             v-model="user.username"
-            @keydown.enter="editarPerfil()"
+            @keydown.enter="editarPerfil"
           />
           <div class="btn"></div>
         </div>
@@ -110,7 +106,7 @@
           <input
             type="text"
             v-model="user.email"
-            @keydown.enter="editarPerfil()"
+            @keydown.enter="editarPerfil"
           />
           <div class="btn"></div>
         </div>
@@ -118,15 +114,15 @@
           <span>Nova senha:</span>
         </div>
         <div class="password">
-          <input type="text" @keydown.enter="editarPerfil()" />
+          <input type="text" @keydown.enter="editarPerfil" />
         </div>
-        <div class="new">
+        <!-- <div class="new">
           <span>Confirme a senha:</span>
-        </div>
-        <div class="re-password">
+        </div> -->
+        <!-- <div class="re-password">
           <input type="text" @keydown.enter="editarPerfil()" />
           <div class="btn"></div>
-        </div>
+        </div> -->
         <div class="logout">
           <a href="/signin">
             <button>Sair</button>
@@ -140,6 +136,9 @@
 
 <style scoped>
 
+.inputs{
+  margin-top: 2rem;
+}
 .change-foto{
   display: flex;
   align-items: center;
@@ -163,7 +162,7 @@
     -webkit-text-fill-color: transparent;
   }
 
-  .user-email {
+  .user-email i {
     color: #eef;
   }
 

@@ -86,12 +86,14 @@ export default {
             <i class="fa-brands fa-whatsapp"></i>
             <a target="_blank" :href="cachorro.tel_responsavel">Contato</a>
           </div>
+          <div class="admin">
           <div class="remove" v-bind="superuser">
             <button v-if="is_superuser == true" @click="removerCao"><i class="fa-solid fa-trash"></i>Remover Cão</button>
           </div>
           <div class="alterarCachorro" v-bind="superuser">
             <RouterLink :to="`/alterarCachorro/${cachorro.id}`">
               <button v-if="is_superuser == true" @click="alterarCao"> Alterar cão</button></RouterLink>
+            </div>
           </div>
         </div>
       </div>
@@ -112,7 +114,12 @@ export default {
 
 }
 
-.alterar button{
+.admin{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.alterarCachorro button{
   margin-bottom: 10px;
   border-radius: 8px;
   height: 50px;

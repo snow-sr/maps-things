@@ -43,7 +43,7 @@ export default {
 
         }
         try {
-          await axios.patch(
+          await axios.put(
             `http://localhost:8000/cachorros/${this.id}/`,
             info)
           alert("Alterado com sucesso!")
