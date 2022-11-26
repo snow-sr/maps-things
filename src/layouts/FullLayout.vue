@@ -6,7 +6,9 @@ import { useAuthStore } from "@/stores/auth";
 export default {
   data() {
     return {
-      user: "",
+      user: {
+        username: "",
+      },
       superuser: "",
     };
   },
@@ -39,9 +41,14 @@ export default {
             </li>
             <li v-if="username">
               <div class="user-foto">
-                <img :src= " user.foto.url "/> 
+                <img v-if="user.foto != null" :src="user.foto.url" />
+          <img
+            v-if="user.foto == null"
+            src="../assets/img/semfoto.png"
+            alt="teste"
+          />
               </div>
-            <RouterLink to="/singout"></RouterLink>
+            <RouterLink to="/singout"></RouterLink> 
           </li>
           <li v-else>
             <RouterLink to="/signin">Login/Registro</RouterLink>
@@ -83,7 +90,12 @@ export default {
               <RouterLink to="/contate">Sobre Nos</RouterLink>
             </li>
             <li v-if="username">
-              <RouterLink to="/singout"> <img :src= " user.foto.url "/> </RouterLink>
+              <RouterLink to="/singout"> <img v-if="user.foto != null" :src="user.foto.url" />
+          <img
+            v-if="user.foto == null"
+            src="../assets/img/semfoto.png"
+            alt="teste"
+          /> </RouterLink>
             </li>
             <li v-else>
               <RouterLink to="/signin">Login/Registro</RouterLink>
