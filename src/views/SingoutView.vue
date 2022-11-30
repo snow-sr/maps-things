@@ -110,12 +110,7 @@
           />
           <div class="btn"></div>
         </div>
-        <div class="new">
-          <span>Nova senha:</span>
-        </div>
-        <div class="password">
-          <input type="text" @keydown.enter="editarPerfil" />
-        </div>
+    
         <!-- <div class="new">
           <span>Confirme a senha:</span>
         </div> -->
