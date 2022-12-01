@@ -1,6 +1,15 @@
 <script>
+import axios from "axios"
 export default {
   props: ["comentarios"],
+  data() {
+  },
+  methods: {
+    async removerComentario() {
+      await axios.delete(`http://localhost:8000/coments/${this.comentarios.id}/`);
+      alert("Cachorro deletado com sucesso!"), this.$router.push("/cachorrada");
+    },
+  },
 };
 </script>
 
@@ -8,9 +17,11 @@ export default {
   <div class="full">
     <div class="comentarios">
       <RouterLink to="/singout"
-        ><h1>{{ comentarios.autor.username }}</h1></RouterLink>
+        ><h1>{{ comentarios.autor.username }}</h1></RouterLink
+      >
       <h2>{{ comentarios.texto }}</h2>
     </div>
+    <button @click="this.id = comentarios.autor.id; removerComentario()">DELETAR</button>
   </div>
 </template>
 
@@ -39,7 +50,6 @@ h2 {
   margin-left: 10px;
   font-size: 10pt;
 }
-
 
 .full {
   max-width: 500px;
