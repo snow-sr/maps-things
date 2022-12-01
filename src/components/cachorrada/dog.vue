@@ -1,44 +1,15 @@
 <script>
-import axios from "axios";
-import { useAuthStore } from "@/stores/auth";
 export default {
-  props: ["comentarios"],
-  data() {
-    return {
-      user: {},
-    };
-  },
-  methods: {
-    async removerComentario() {
-      await axios.delete(
-        `http://localhost:8000/coments/${this.comentarios.id}/`
-      );
-      alert("Comentario deletado com sucesso!"),
-        this.$router.push("/cachorrada");
-    },
-  },
-
+  props: ["cachorro"],
 };
 </script>
-
 <template>
   <div class="full">
     <div class="comentarios">
       <RouterLink to="/singout"
-        ><h1>{{ comentarios.autor.username }}</h1></RouterLink
-      >
-      <h2>{{ comentarios.texto }}</h2>
-      <div class="remove" v-bind="is_superuser">
-        <button
-          v-if="is_superuser == true"
-          @click="
-            this.id = comentarios.autor.id;
-            removerComentario();
-          "
-        >
-          DELETAR
-        </button>
-      </div>
+        ><h1>{{ cachorro.nome }}</h1>
+        <h2>{{ cachorro.descricao }}</h2>
+      </RouterLink>
     </div>
   </div>
 </template>
