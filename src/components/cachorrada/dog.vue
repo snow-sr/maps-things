@@ -8,7 +8,7 @@ export default {
     <div class="comentarios">
       <RouterLink to="/singout"
         ><h1>{{ cachorro.nome }}</h1>
-        <h2>{{ cachorro.descricao }}</h2>
+        <h2>Esteve aqui!</h2>
       </RouterLink>
     </div>
   </div>
@@ -28,7 +28,7 @@ button {
   max-width: 750px;
   border-radius: 0px 10px 10px 10px;
   border: 1px solid #eef;
-  background-color: #161e35;
+  background-color: #a31aaf;
   display: flex;
   margin-top: 20px;
   margin-left: 20px;

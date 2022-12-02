@@ -1,10 +1,11 @@
 <script>
-import Comentarios from "@/components/cachorrada/Comentarios.vue";
+import Comentarios from "@/components/cachorrada/Comentarios.vue"
+import dog from "@/components/cachorrada/dog.vue"
 import axios from "axios";
 import { mapStores, mapState } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 export default {
-  components: { Comentarios },
+  components: { Comentarios, },
   data() {
     return {
       comentarios: [],
