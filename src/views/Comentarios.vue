@@ -1,11 +1,11 @@
 <script>
-import Comentarios from "@/components/cachorrada/Comentarios.vue"
-import dog from "@/components/cachorrada/dog.vue"
+import Comentarios from "@/components/cachorrada/Comentarios.vue";
+import dog from "@/components/cachorrada/dog.vue";
 import axios from "axios";
 import { mapStores, mapState } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 export default {
-  components: { Comentarios, },
+  components: { Comentarios, dog },
   data() {
     return {
       comentarios: [],
@@ -30,9 +30,7 @@ export default {
       await this.getAllComments();
     },
     async getAllComments() {
-      const comentarios = await axios.get(
-        "http://localhost:8000/coments/"
-      );
+      const comentarios = await axios.get("http://localhost:8000/coments/");
       this.comentarios = comentarios.data;
     },
   },
@@ -43,53 +41,54 @@ export default {
 </script>
 <template>
   <div class="all">
-
-    <div class="outer">
-      <div class="map">
-        <img src="@/assets/img/ifcmapatt.png" alt="" />
-    </div>
-    <div class="container">
+    <!-- main -->
+    <main class="mapa">
+      <dog name="FMÇ" :position="[100, 360]"></dog>
+      <dog name="MAI" :position="[740, 600]"></dog>
+    </main>
+    <!-- main -->
+    <div class="corpo">
       <div class="comentarios">
         <Comentarios
-         
-        v-for="comentario in comentarios"
+          v-for="comentario in comentarios"
           :key="comentario.id"
-          :comentarios="comentario"
-          />
+          :comentarios="comentario" />
       </div>
     </div>
   </div>
   <div class="texts">
     <div class="enviar">
       <input
-      @keydown.enter="addComment()"
-      type="text"
+        @keydown.enter="addComment()"
+        type="text"
         style="padding: 4px"
         placeholder="escreva seu comentario
-        "
-        v-model="comentario.texto"
-        />
-        <div class="submit">
-          <button
+          "
+        v-model="comentario.texto" />
+      <div class="submit">
+        <button
           v-on:click.prevent="addComment"
           type="submit"
-          class="btn btn-primary"
-          >
+          class="btn btn-primary">
           Enviar
         </button>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <style scoped>
-
-.all{
+.all {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+}
+.mapa {
+  border-radius: 20px 20px 0 0;
+  background-image: url("../assets/img/ifcmapatt.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 90vh;
+  width: 50vw;
 }
 
 .outer {
@@ -101,7 +100,6 @@ export default {
 .comentarios {
   height: 90px;
 }
-
 
 h1 {
   background: -webkit-linear-gradient(45deg, #8a93e4, #00b7ff, #3071e7);
@@ -115,12 +113,13 @@ h1 {
 }
 
 input {
+  margin-left: 63rem;
   color: #eef;
   background: rgba(22, 30, 53, 0.65);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(12.5px);
   -webkit-backdrop-filter: blur(12.5px);
-  width: 840px;
+  width: 900px;
   border-radius: 15px;
   outline: 0;
 }
@@ -147,10 +146,9 @@ button:hover {
 .map img {
   border-radius: 20px 20px 0 0;
   height: 840px;
-
 }
 
-.container {
+.corpo {
   overflow: auto;
   display: flex;
   background: #161e35a6;
@@ -159,7 +157,7 @@ button:hover {
   -webkit-backdrop-filter: blur(12.5px);
   border: 0px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0px 5px 30px #232733;
-  width: 900px;
-  height: 833px;
+  height: 90vh;
+  width: 50vw;
 }
 </style>

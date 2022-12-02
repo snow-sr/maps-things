@@ -15,10 +15,10 @@ export default {
   async created() {
     const res = await axios.get(`http://localhost:8000/usuarios/${this.id}/`);
     this.user = res.data;
-    console.log(this.user)
+    console.log(this.user);
   },
   computed: {
-    ...mapState(useAuthStore, ["id","username", "is_superuser"]),
+    ...mapState(useAuthStore, ["id", "username", "is_superuser"]),
   },
 };
 </script>
@@ -37,18 +37,17 @@ export default {
           <li>
             <RouterLink to="/postcachorro" v-if="0 === '2'"
               >Novo cão</RouterLink
-              >
-            </li>
-            <li v-if="username">
-              <div class="user-foto">
-                <img v-if="user.foto != null" :src="user.foto.url" />
-          <img
-            v-if="user.foto == null"
-            src="../assets/img/semfoto.png"
-            alt="teste"
-          />
-              </div>
-            <RouterLink to="/singout"></RouterLink> 
+            >
+          </li>
+          <li v-if="username">
+            <div class="user-foto">
+              <img v-if="user.foto != null" :src="user.foto.url" />
+              <img
+                v-if="user.foto == null"
+                src="../assets/img/semfoto.png"
+                alt="teste" />
+            </div>
+            <RouterLink to="/singout"></RouterLink>
           </li>
           <li v-else>
             <RouterLink to="/signin">Login/Registro</RouterLink>
@@ -69,13 +68,11 @@ export default {
           <picture>
             <source
               srcset="@/assets/img/logomobile.png"
-              media="(max-width: 890px)"
-            />
+              media="(max-width: 890px)" />
             <img src="@/assets/img/IMG_20220714_153653.png" alt="" /> </picture
         ></RouterLink>
 
         <div class="menu" v-bind="superuser">
-
           <ul>
             <li>
               <RouterLink to="/cachorrada">Home</RouterLink>
@@ -90,18 +87,18 @@ export default {
               <RouterLink to="/contate">Sobre Nos</RouterLink>
             </li>
             <li v-if="username">
-              <RouterLink to="/singout"> <img v-if="user.foto != null" :src="user.foto.url" />
-          <img
-            v-if="user.foto == null"
-            src="../assets/img/semfoto.png"
-            alt="teste"
-          /> </RouterLink>
+              <RouterLink to="/singout">
+                <img v-if="user.foto != null" :src="user.foto.url" />
+                <img
+                  v-if="user.foto == null"
+                  src="../assets/img/semfoto.png"
+                  alt="teste" />
+              </RouterLink>
             </li>
             <li v-else>
               <RouterLink to="/signin">Login/Registro</RouterLink>
             </li>
           </ul>
-
         </div>
       </div>
     </div>
@@ -110,15 +107,13 @@ export default {
 </template>
 
 <style scoped>
-
-ul img{
-  width:2rem;
+ul img {
+  width: 2rem;
   height: 2rem;
   border-radius: 50%;
 }
 
-
-.username img{
+.username img {
   border-radius: 50%;
 }
 
@@ -224,9 +219,7 @@ a:-webkit-any-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    
   }
-
 
   .menu {
     display: none;
