@@ -4,7 +4,7 @@
     <div class="icn">
       <h1>{{ name }}</h1>
     </div>
-    <span>Esteve aqui !!</span>
+    <span>A</span>
   </main>
 </template>
 

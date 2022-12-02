@@ -8,6 +8,11 @@ export default {
   components: { Comentarios, dog },
   data() {
     return {
+      x : [200,400],
+      y : [200,400],
+      z : [150,400],
+      a : [150,500],
+      tagA: {},
       comentarios: [],
       comentario: {
         texto: "",
@@ -33,9 +38,14 @@ export default {
       const comentarios = await axios.get("http://localhost:8000/coments/");
       this.comentarios = comentarios.data;
     },
+    async getTagA() {
+      const tagA = await axios.get("http://127.0.0.1:8000/tags/?ID=1");
+      this.tagA = tagA.dataA
+    }
   },
   async created() {
     await this.getAllComments();
+    await this.getTagA();
   },
 };
 </script>
@@ -43,10 +53,10 @@ export default {
   <div class="all">
     <!-- main -->
     <main class="mapa">
-      <dog name="FMÇ" :position="[100, 360]"></dog>
-      <dog name="MAI" :position="[740, 600]"></dog>
-      <dog name="CHU" :position="[200, 360]"></dog>
-      <dog name="FOR" :position="[300, 360]"></dog>
+      <dog name="FMÇ" :position="x"></dog>
+      <dog name="MAI" :position="y"></dog>
+      <dog name="CHU" :position="z"></dog>
+      <dog name="FOR" :position="a"></dog>
     </main>
     <!-- main -->
     <div class="corpo">
@@ -74,6 +84,15 @@ export default {
           class="btn btn-primary">
           Enviar
         </button>
+        <button
+          v-on:click.prevent="getTagA"
+          type="submit"
+          class="btn btn-primary">
+          getTag
+        </button>
+        <div>
+          {{ tagA }}
+        </div>
       </div>
     </div>
   </div>
