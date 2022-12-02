@@ -51,7 +51,7 @@ main {
   display: flex;
   align-items: center;
   cursor: pointer;
-  background-color: #ff00ff79;
+  background-color: #ff00ff;
   width: 70px;
   height: 70px;
 }

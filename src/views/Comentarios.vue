@@ -45,6 +45,8 @@ export default {
     <main class="mapa">
       <dog name="FMÇ" :position="[100, 360]"></dog>
       <dog name="MAI" :position="[740, 600]"></dog>
+      <dog name="CHU" :position="[200, 360]"></dog>
+      <dog name="FOR" :position="[300, 360]"></dog>
     </main>
     <!-- main -->
     <div class="corpo">
